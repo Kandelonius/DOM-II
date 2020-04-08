@@ -3,6 +3,11 @@ const get = (selector) => {
     return document.querySelector(selector)
 }
 const header = get('header');
+const busImage = get('.intro img');
+const ctaH2 = get('.intro h2');
+const buttonEls = document.querySelectorAll('.btn');
+let headerHasEventListener = true;
+let busFlipped = false;
 function headerBackground(event){
     // let zero = (header.clientWidth - header.clientWidth);
     // console.log(zero);
@@ -25,10 +30,9 @@ function headerBackground(event){
 // header.addEventListener('mousemove', event => {
     //     console.log(`x is ${event.offsetX} y is ${event.offsetY};`);
     // })
-const buttonEls = document.querySelectorAll('.btn');
+
 buttonEls[0].textContent = 'set header color to white';
 buttonEls[1].textContent = 'toggle header color';
-let headerHasEventListener = true;
 function headerColorToggle(event){
     if (headerHasEventListener){
         header.removeEventListener('mousemove', 
@@ -40,7 +44,17 @@ function headerColorToggle(event){
         headerHasEventListener = true;
     }
 }
-
+function flipImage(event){
+    if(busFlipped){
+        busImage.setAttribute('style','transform:rotate(0deg)');
+        ctaH2.textContent = 'Welcome To Fun Bus!';
+        busFlipped = false;
+    }else {
+        busImage.setAttribute('style','transform:rotate(180deg)');
+        ctaH2.textContent += ' in Australia??'
+        busFlipped = true;
+    }
+}
 
 // console.log(buttonEls);
 // console.log(buttonEls[1].textContent);
@@ -64,3 +78,4 @@ buttonEls[0].addEventListener('click', event =>{
 header.addEventListener('mousemove', headerBackground);
 header.addEventListener('click', headerColorToggle);
 buttonEls[1].addEventListener('click', headerColorToggle);
+busImage.addEventListener('click', flipImage);
