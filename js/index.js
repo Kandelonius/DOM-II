@@ -2,7 +2,6 @@
 const get = (selector) => {
     return document.querySelector(selector)
 }
-
 const header = get('header');
 function headerBackground(event){
     // let zero = (header.clientWidth - header.clientWidth);
@@ -23,17 +22,26 @@ function headerBackground(event){
     // let negative = 255 - 255*event.offsetX/headerWidth
     // console.log(negative);
 }
-header.addEventListener('mousemove', headerBackground);
 // header.addEventListener('mousemove', event => {
-//     console.log(`x is ${event.offsetX} y is ${event.offsetY};`);
-// })
+    //     console.log(`x is ${event.offsetX} y is ${event.offsetY};`);
+    // })
 const buttonEls = document.querySelectorAll('.btn');
-buttonEls[1].textContent = 'turn off header color';
+buttonEls[0].textContent = 'set header color to white';
+buttonEls[1].textContent = 'toggle header color';
+let headerHasEventListener = true;
 function headerColorToggle(event){
-    header.removeEventListener('mousemove', headerBackground);
-    // debugger
+    if (headerHasEventListener){
+        header.removeEventListener('mousemove', 
+        headerBackground);
+        headerHasEventListener = false;
+    }else{
+        header.addEventListener('mousemove', 
+        headerBackground);
+        headerHasEventListener = true;
+    }
 }
-buttonEls[1].addEventListener('click', headerColorToggle);
+
+
 // console.log(buttonEls);
 // console.log(buttonEls[1].textContent);
 // var box = document.querySelector(".box");
@@ -50,3 +58,9 @@ buttonEls[1].addEventListener('click', headerColorToggle);
 // signUpOne.addEventListener('click', event)
 // const buttonChange = get('.destination .btn'){
 // }
+buttonEls[0].addEventListener('click', event =>{
+    header.style.backgroundColor = 'white';
+});
+header.addEventListener('mousemove', headerBackground);
+header.addEventListener('click', headerColorToggle);
+buttonEls[1].addEventListener('click', headerColorToggle);
