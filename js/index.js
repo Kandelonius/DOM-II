@@ -36,7 +36,7 @@ function headerBackground(event){
     //     console.log(`x is ${event.offsetX} y is ${event.offsetY};`);
     // })
 
-buttonEls[0].textContent = 'set header color to white';
+buttonEls[0].textContent = 'does nothing';
 buttonEls[1].textContent = 'toggle header color';
 function headerColorToggle(event){
     if (headerHasEventListener){
@@ -90,8 +90,10 @@ function flipImage(event){
 // }
 header.addEventListener('mousemove', headerBackground);
 header.addEventListener('click', headerColorToggle);
-buttonEls[0].addEventListener('click', event =>{
-    header.style.backgroundColor = 'white';
+document.addEventListener('keydown', event =>{
+    if(event.key === 'Escape'){
+        header.style.backgroundColor = 'white';
+    }
 });
 buttonEls[1].addEventListener('click', headerColorToggle);
 busImage.addEventListener('click', flipImage);
